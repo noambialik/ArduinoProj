@@ -2,12 +2,11 @@
 #define setPin 6
 
 SoftwareSerial mySerial(10,11); //RX, TX
-String NAME = "Nati";
 
 void setup() {
   Serial.begin(9600);
   mySerial.begin(9600);
-  
+    
   pinMode(6, OUTPUT);
   digitalWrite(setPin, LOW);
   delay(100);
@@ -29,8 +28,8 @@ void loop() {
   
   if(Serial.available() > 0){//Read from serial monitor and send over HC-12
     String input = Serial.readString();
-    mySerial.println(NAME+": "+input); 
-    Serial.println("Me: "+input); 
+    mySerial.println(input); 
+//    Serial.println("Me: "+input); 
     //Serial.println(input);  
     //mySerial.println(input); 
 
