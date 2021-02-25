@@ -15,12 +15,12 @@ def init_log():
 def get_from_ser():
     s = ser.read_until().decode("utf-8")
     if s != "\r\n" and s != "" and not s.startswith("OK-"):
-        logging.info(s)
+        return s
 
-def get_from_ser_loop():
-    logging.info("Welcome!")
-    while True:
-        get_from_ser()  
+# def get_from_ser_loop():
+#     logging.info("Welcome!")
+#     while True:
+#         get_from_ser()  
 
 
 def send_to_ser(msg_to_send):
@@ -31,11 +31,18 @@ def send_to_ser(msg_to_send):
         logging.error("cannot convert to bytes. message")
     ser.write(msg)
 
-init_log()
-t1 = Thread(target=get_from_ser_loop)
-t1.setDaemon(True)
-t1.start()
+def run_get_thread():
+    t1 = Thread(target=get_from_ser_loop)
+    t1.setDaemon(True)
+    t1.start()
 
-while True:
-    msg_to_send = input("Send:")
-    send_to_ser(msg_to_send)
+if __name__ =="__main__":
+    init_log()
+    t1 = Thread(target=get_from_ser_loop)
+    t1.setDaemon(True)
+    t1.start()
+
+    while True:
+        # msg_to_send = input("Send:")
+        # send_to_ser(msg_to_send)
+        pass

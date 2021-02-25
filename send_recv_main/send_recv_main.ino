@@ -11,13 +11,15 @@ void setup() {
   digitalWrite(setPin, LOW);
   delay(100);
   
-  mySerial.write("AT+A001");
+  mySerial.write("AT+A002");
   delay(100);
   mySerial.write("AT+C001");
   delay(100);
   mySerial.write("AT+B9600");
   delay(100);
   mySerial.write("AT+FU3");
+  delay(100);
+  mySerial.write("AT+P6");
   delay(100);
   
   digitalWrite(setPin, HIGH);
@@ -29,7 +31,7 @@ void loop() {
   if(Serial.available() > 0){//Read from serial monitor and send over HC-12
     String input = Serial.readString();
     mySerial.println(input); 
-//    Serial.println("Me: "+input); 
+    //Serial.println("Me: "+input); 
     //Serial.println(input);  
     //mySerial.println(input); 
 

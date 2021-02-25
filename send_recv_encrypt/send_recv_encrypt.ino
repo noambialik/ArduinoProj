@@ -9,7 +9,6 @@ String NAME = "Tomer";
 void setup() {
   Serial.begin(9600);
   mySerial.begin(9600);
-  Serial.println("Welcome"); 
 }
  
 void loop() {
@@ -17,12 +16,13 @@ void loop() {
  
   if(Serial.available() > 0){//Read from serial monitor and send over HC-12
     String input = Serial.readString();
-    String encoded = input;
-    for(int i=0; i < input.length(); i++){
-      encoded[i] += input.length();
+    String full = NAME + ": " + input;
+    String encoded = NAME + ":" + input;
+    for(int i=0; i < full.length(); i++){
+      encoded[i] += full.length();
     }
-    mySerial.println(NAME+": "+encoded); 
-    Serial.println("Tomer: "+input); 
+    mySerial.println(encoded); 
+    Serial.println(full); 
  
   }
  
